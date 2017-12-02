@@ -9,19 +9,15 @@ import java.io.ObjectOutputStream;
 import java.net.*;
 
 public class Server {
+    private int port;
 
-
-    public static void main(String[] args){
-
-
-
+    Server(int port){
+        this.port = port;
     }
 
     public void runServer() throws IOException {
 
         ServerSocket server = new ServerSocket(5000, 100);
-
-
         while (true) {
             try {
                 Socket connection = server.accept();
@@ -29,45 +25,19 @@ public class Server {
                 ObjectInputStream input = new ObjectInputStream(connection.getInputStream());
                 ObjectOutputStream output = new ObjectOutputStream(connection.getOutputStream());
 
-                try // send object to client
                 {
                     output.writeObject("connection successful");
                     output.flush(); // flush output to client
 
                     while(true){
-
-                        try // read message and display it
-                        {
-                            String message = (String) input.readObject(); // read new message
-                            displayMessage("\n" + message); // display message
-                        } catch (ClassNotFoundException classNotFoundException) {
-                            displayMessage("\nUnknown object type received");
-                        }
+                        String message = (String) input.readObject(); // read new message
                     }
 
                 } catch (IOException ioException) {
 
                 }
                 processConnection(); // process connection
-            } catch (EOFException eofException) {
-                displayMessage("\nServer terminated connection");
-            } finally {
-                closeConnection(); //  close connection
-                ++counter;
-            }
         }
-
-        try // send object to client
-        {
-            output.writeObject("SERVER>>> " + message);
-            output.flush(); // flush output to client
-            displayMessage("\nSERVER>>> " + message);
-        } catch (IOException ioException) {
-            displayArea.append("\nError writing object");
-        }
-
-
-
     }
 
 
