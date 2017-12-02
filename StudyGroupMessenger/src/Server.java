@@ -20,7 +20,7 @@ public class Server {
 
     public void runServer() throws IOException {
 
-        ServerSocket server = new ServerSocket(5000, 100);
+        ServerSocket server = new ServerSocket(port, 100);
         while (message != "end") {
             Socket connection = server.accept();
             ObjectOutputStream output = new ObjectOutputStream(connection.getOutputStream());
