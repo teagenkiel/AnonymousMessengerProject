@@ -36,7 +36,7 @@ public class Client {
 
     private void processConnection() throws IOException {
 
-        while (message.equals("end")) {
+        while (!message.equals("end")) {
 
             try {
 
