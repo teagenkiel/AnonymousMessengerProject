@@ -39,9 +39,9 @@ public class Server {
                         try // read message and display it
                         {
                             String message = (String) input.readObject(); // read new message
-                            displayMessage("\n" + message); // display message
+
                         } catch (ClassNotFoundException classNotFoundException) {
-                            displayMessage("\nUnknown object type received");
+
                         }
                     }
 
@@ -57,14 +57,7 @@ public class Server {
             }
         }
 
-        try // send object to client
-        {
-            output.writeObject("SERVER>>> " + message);
-            output.flush(); // flush output to client
-            displayMessage("\nSERVER>>> " + message);
-        } catch (IOException ioException) {
-            displayArea.append("\nError writing object");
-        }
+
 
 
 
