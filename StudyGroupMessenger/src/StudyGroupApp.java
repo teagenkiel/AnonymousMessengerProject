@@ -1,5 +1,10 @@
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class StudyGroupApp extends Application {
 
@@ -10,7 +15,15 @@ public class StudyGroupApp extends Application {
     @Override
     public void start(Stage primaryStage) {
 
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("HomeScene.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+        primaryStage.setScene(new Scene(root));
+        primaryStage.show();
 
     }
 }
