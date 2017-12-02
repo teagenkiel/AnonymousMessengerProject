@@ -68,6 +68,7 @@ public class Client extends JFrame {
 
     private void processConnection() throws IOException {
         message = "";
+
         while (!message.equals("end")) {
             try {
                 message = (String) input.readObject();
