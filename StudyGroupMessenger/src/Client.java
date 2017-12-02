@@ -14,12 +14,19 @@ public class Client {
     private ObjectOutputStream output;
     private ObjectInputStream input;
     private String message;
+    private String host;
+    private int port;
     Client(String host, int port) throws IOException{
-            socket = new Socket(InetAddress.getByName(host), port);
-            output = new ObjectOutputStream(socket.getOutputStream());
-            output.flush();
-            input = new ObjectInputStream(socket.getInputStream());
-            processConnection();
+        this.host = host;
+        this.port = port;
+    }
+
+    public void runClient()throws IOException{
+        socket = new Socket(InetAddress.getByName(host), port);
+        output = new ObjectOutputStream(socket.getOutputStream());
+        output.flush();
+        input = new ObjectInputStream(socket.getInputStream());
+        processConnection();
     }
 
     private void processConnection() throws IOException{
