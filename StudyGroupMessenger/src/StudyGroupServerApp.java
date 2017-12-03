@@ -18,14 +18,9 @@ public class StudyGroupServerApp extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws IOException {
 
-        Parent root = null;
-        try {
-            root = FXMLLoader.load(getClass().getResource("ServerScene.fxml"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Parent root = FXMLLoader.load(getClass().getResource("ServerScene.fxml"));
 
         primaryStage.setScene(new Scene(root));
         primaryStage.show();

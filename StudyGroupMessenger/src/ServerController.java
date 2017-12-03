@@ -20,16 +20,12 @@ public class ServerController implements Runnable{
     @FXML
     private TextArea serverLogArea;
 
-    ServerController(int port) {
-        this.port = port;
-    }
-
     @FXML
     public void run(){
         while (true){
             try {
                 message = "";
-                server = new ServerSocket(port);
+                server = new ServerSocket(12345);
                 while (!message.equals("end")) {
                     connection = server.accept();
                     new Thread(new WrkrRunnable(connection, "this is a multithreaded server")).start();
@@ -76,6 +72,7 @@ public class ServerController implements Runnable{
         }
     }
 
-
-    
+    public void setPort(int port) {
+        this.port = port;
+    }
 }
