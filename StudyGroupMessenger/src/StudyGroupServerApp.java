@@ -31,14 +31,10 @@ public class StudyGroupServerApp extends Application {
         }
 
         Server studyGroupServer = null;
-        try {
-            studyGroupServer = new Server(12345);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        studyGroupServer = new Server(12345);
 
         ServerSceneController controller = loader.getController();
-        controller.setAndRunServer(studyGroupServer);
+       // controller.setAndRunServer(studyGroupServer);
 
         primaryStage.setScene(new Scene(root));
         primaryStage.show();

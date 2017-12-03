@@ -15,15 +15,16 @@ public class ServerSceneController {
     @FXML
     private TextArea serverLogArea;
 
-    public void setAndRunServer(Server server) {
+    public void setAndRunServer() {
 
-        this.server = server;
+        Server server = new Server(12345);
+        /*this.server = server;
 
         try {
             this.server.runServer();
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     public TextArea getServerLogArea() {

@@ -14,6 +14,7 @@ public class Server implements Runnable{
     private ObjectInputStream input;
     private ObjectOutputStream output;
     private Socket connection;
+    private ServerSocket server;
 
     Server(int port) {
         this.port = port;
@@ -21,37 +22,29 @@ public class Server implements Runnable{
 
     public void run(){
         try {
-            runServer();
+            server = new ServerSocket(port);
+            while (!message.equals("end")) {
+                connection = server.accept();
+                new Thread(new WrkrRunnable(connection, "this is a multithreaded server")).start();
+            }
             connection.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    /*
     public void connectToClient() throws IOException{
         ServerSocket socket = new ServerSocket(12345);
         message = "";
         while(!message.equals("end")){
             connection = socket.accept();
-            port++;
-            new Thread(new Server(port )).start();
+            new Thread(new Server(port)).start();
         }
-    }
+    }*/
 
-    public void runServer() throws IOException {
 
-        ServerSocket server = new ServerSocket(port, 100);
-        while (message != "end") {
-            Socket connection = server.accept();
-            output = new ObjectOutputStream(connection.getOutputStream());
-            input = new ObjectInputStream(connection.getInputStream());
-            output.writeObject("connection successful");
-            output.flush();
-            processConnection(); // process connection
-        }
-    }
-
-    private void processConnection() throws IOException{
+/*    private void processConnection() throws IOException{
 
         try {
             message = (String) input.readObject();
@@ -59,7 +52,7 @@ public class Server implements Runnable{
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
     private void display(String message){
         System.out.println(message);
