@@ -17,45 +17,18 @@ import java.util.EventListener;
 /**
  *
  */
-public class Client extends JFrame {
+public class Client {
     private Socket socket;
     private ObjectOutputStream output;
     private ObjectInputStream input;
     private String message;
     private String host;
     private int port;
-    private JTextArea chatArea;
-    private JButton button;
+
 
     Client(String host, int port) throws IOException {
-        super("Client");
         this.host = host;
         this.port = port;
-
-        setLayout(new FlowLayout());
-
-        setSize(500,500);
-        setVisible(true);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-        chatArea = new JTextArea();
-        chatArea.setSize(500,400);
-        chatArea.setVisible(true);
-        chatArea.setEditable(true);
-        add(chatArea);
-
-        button = new JButton("Enter");
-        button.setVisible(true);
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                message = (String) chatArea.getText();
-                System.out.print(message);
-                send(message);
-            }
-        });
-
-        add(button);
 
     }
 
@@ -64,13 +37,14 @@ public class Client extends JFrame {
         output = new ObjectOutputStream(socket.getOutputStream());
         output.flush();
         input = new ObjectInputStream(socket.getInputStream());
+        output.writeObject("message from client");
+        output.flush();
         processConnection();
     }
 
 
     private void processConnection() throws IOException {
         message = "";
-
         while (!message.equals("end")) {
             try {
                 message = (String) input.readObject();
@@ -81,15 +55,9 @@ public class Client extends JFrame {
         }
     }
 
-    private void display(String message){
-        new Runnable(){
+    //private void display(String message){
 
-            @Override
-            public void run() {
-                chatArea.append(message+'\n');
-            }
-        };
-    }
+    //}
 
     private void send(String message){
         try {

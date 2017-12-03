@@ -22,19 +22,22 @@ public class ServerController implements Runnable{
 
     @FXML
     public void run(){
-        while (true){
+        display("display works");
+
+
             try {
                 message = "";
                 server = new ServerSocket(12345);
                 while (!message.equals("end")) {
                     connection = server.accept();
-                    new Thread(new WrkrRunnable(connection, "this is a multithreaded server")).start();
+                    display("connected to client");
+                    new Thread(new WrkrRunnable(connection)).start();
                 }
                 connection.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
+
     }
 
     /*
