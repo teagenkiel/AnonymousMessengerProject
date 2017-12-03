@@ -8,30 +8,31 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.*;
+import java.util.concurrent.Executor;
 
-public class ServerController implements Runnable{
+public class ServerController {
     private int port;
     private String message;
     private ObjectInputStream input;
     private ObjectOutputStream output;
     private Socket connection;
     private ServerSocket server;
+    private Executor executor;
 
     @FXML
     private TextArea serverLogArea;
 
     @FXML
-    public void run(){
+    public void runServer(){
         display("display works");
-
-
             try {
                 message = "";
                 server = new ServerSocket(12345);
                 while (!message.equals("end")) {
                     connection = server.accept();
+                    SocketThread socketThread = new SocketThread(connection);
                     display("connected to client");
-                    new Thread(new WrkrRunnable(connection)).start();
+                    executor.execute(socketThread);
                 }
                 connection.close();
             } catch (IOException e) {
