@@ -21,20 +21,11 @@ public class StudyGroupServerApp extends Application {
     public void start(Stage primaryStage) {
 
         Parent root = null;
-        FXMLLoader loader = null;
         try {
-            loader = new FXMLLoader(getClass().getResource("BoardScene.fxml"));
-            root = loader.load();
-
+            root = FXMLLoader.load(getClass().getResource("ServerScene.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        Server studyGroupServer = null;
-        studyGroupServer = new Server(12345);
-
-        ServerSceneController controller = loader.getController();
-       // controller.setAndRunServer(studyGroupServer);
 
         primaryStage.setScene(new Scene(root));
         primaryStage.show();

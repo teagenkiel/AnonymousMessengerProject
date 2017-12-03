@@ -9,7 +9,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.*;
 
-public class Server implements Runnable{
+public class ServerController implements Runnable{
     private int port;
     private String message;
     private ObjectInputStream input;
@@ -20,7 +20,7 @@ public class Server implements Runnable{
     @FXML
     private TextArea serverLogArea;
 
-    Server(int port) {
+    ServerController(int port) {
         this.port = port;
     }
 
@@ -47,7 +47,7 @@ public class Server implements Runnable{
         message = "";
         while(!message.equals("end")){
             connection = socket.accept();
-            new Thread(new Server(port)).start();
+            new Thread(new ServerController(port)).start();
         }
     }*/
 
