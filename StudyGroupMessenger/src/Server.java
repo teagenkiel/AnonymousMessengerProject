@@ -13,21 +13,28 @@ public class Server implements Runnable{
     private String message;
     private ObjectInputStream input;
     private ObjectOutputStream output;
+    private Socket connection;
 
-    Server(Socket client) throws IOException {
-        ServerSocket socket = new ServerSocket(12345, 100);
-
-        while(!message.equals("end")){
-            Socket connection = socket.accept();
-            new Thread(new Server(connection)).start();
-        }
+    Server(int port) {
+        this.port = port;
     }
 
     public void run(){
         try {
-            processConnection();
+            runServer();
+            connection.close();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void connectToClient() throws IOException{
+        ServerSocket socket = new ServerSocket(12345);
+        message = "";
+        while(!message.equals("end")){
+            connection = socket.accept();
+            port++;
+            new Thread(new Server(port )).start();
         }
     }
 
