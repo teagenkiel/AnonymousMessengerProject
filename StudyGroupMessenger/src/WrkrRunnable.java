@@ -16,7 +16,7 @@ public class WrkrRunnable implements Runnable {
         try{
             InputStream input = client.getInputStream();
             OutputStream output = client.getOutputStream();
-
+            System.out.println("Thread");
             output.close();
             input.close();
         }catch (IOException e){

@@ -21,15 +21,18 @@ public class Server implements Runnable{
     }
 
     public void run(){
-        try {
-            server = new ServerSocket(port);
-            while (!message.equals("end")) {
-                connection = server.accept();
-                new Thread(new WrkrRunnable(connection, "this is a multithreaded server")).start();
+        while (true){
+            try {
+                message = "";
+                server = new ServerSocket(port);
+                while (!message.equals("end")) {
+                    connection = server.accept();
+                    new Thread(new WrkrRunnable(connection, "this is a multithreaded server")).start();
+                }
+                connection.close();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            connection.close();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
