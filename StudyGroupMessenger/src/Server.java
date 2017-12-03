@@ -1,7 +1,8 @@
 /**
  *
  */
-
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -16,10 +17,14 @@ public class Server implements Runnable{
     private Socket connection;
     private ServerSocket server;
 
+    @FXML
+    private TextArea serverLogArea;
+
     Server(int port) {
         this.port = port;
     }
 
+    @FXML
     public void run(){
         while (true){
             try {
@@ -58,7 +63,7 @@ public class Server implements Runnable{
     }*/
 
     private void display(String message){
-        System.out.println(message);
+        serverLogArea.setText(message);
 
     }
 
