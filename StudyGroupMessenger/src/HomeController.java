@@ -25,6 +25,7 @@ public class HomeController {
 
         String message = messageField.getText();
 
+
         //send message to client, which will send to server
         //get entire new chat log from client, which gets it from server
         chatArea.setText(message);
