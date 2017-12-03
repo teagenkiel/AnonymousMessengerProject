@@ -9,12 +9,13 @@ public class ServerTest {
 
     public static void main(String[] args){
 
-        Server myServer = new Server(12345);
-
+        Server myServer;
         try {
-            myServer.runServer();
+            myServer = new Server(new ));
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
     }
 }

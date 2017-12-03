@@ -28,6 +28,7 @@ public class Client extends JFrame {
     private JButton button;
 
     Client(String host, int port) throws IOException {
+        super("Client");
         this.host = host;
         this.port = port;
 
@@ -48,7 +49,8 @@ public class Client extends JFrame {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                message = chatArea.getText();
+                message = (String) chatArea.getText();
+                System.out.print(message);
                 send(message);
             }
         });

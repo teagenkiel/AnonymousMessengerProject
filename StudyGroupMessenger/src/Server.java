@@ -2,31 +2,33 @@
  *
  */
 
-import javax.swing.*;
-import java.io.EOFException;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.*;
 
-public class Server extends JFrame{
+public class Server implements Runnable{
     private int port;
     private String message;
     private ObjectInputStream input;
     private ObjectOutputStream output;
-    private JTextField chatArea;
 
-    Server(int port) {
-        this.port = port;
-        setSize(500,500);
+    Server(Socket client) throws IOException {
+        ServerSocket socket = new ServerSocket(12345, 100);
 
-        chatArea = new JTextField(50);
-        chatArea.setEditable(true);
-        chatArea.setVisible(true);
-        setVisible(true);
-        add(chatArea);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        while(!message.equals("end")){
+            Socket connection = socket.accept();
+            new Thread(new Server(connection)).start();
+        }
+    }
 
+    public void run(){
+        try {
+            processConnection();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void runServer() throws IOException {
@@ -47,20 +49,14 @@ public class Server extends JFrame{
         try {
             message = (String) input.readObject();
             display(message);
-            System.out.println(message);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
 
     private void display(String message){
-        new Runnable(){
+        System.out.println(message);
 
-            @Override
-            public void run() {
-                chatArea.setText(message+'\n');
-            }
-        };
     }
 
     private void send(String message){
