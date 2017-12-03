@@ -30,7 +30,12 @@ public class StudyGroupServerApp extends Application {
             e.printStackTrace();
         }
 
-        Server studyGroupServer = new Server(12345);
+        Server studyGroupServer = null;
+        try {
+            studyGroupServer = new Server(12345);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         ServerSceneController controller = loader.getController();
         controller.setAndRunServer(studyGroupServer);
