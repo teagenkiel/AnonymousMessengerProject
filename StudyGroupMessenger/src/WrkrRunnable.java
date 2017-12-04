@@ -4,10 +4,8 @@ import java.net.Socket;
 public class WrkrRunnable implements Runnable {
     private Socket client = null;
     private String message = null;
-    private ObjectInputStream input;
-    private ObjectInputStream output;
 
-    WrkrRunnable(Socket client, String message) {
+    WrkrRunnable(Socket client) {
         this.client = client;
         this.message = message;
     }
