@@ -9,6 +9,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.*;
 import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import javafx.concurrent.Task;
 
 public class ServerController {
     private int port;
@@ -18,26 +22,48 @@ public class ServerController {
     private Socket connection;
     private ServerSocket server;
     private Executor executor;
+    private int counter = 0;
 
     @FXML
     private TextArea serverLogArea;
 
     @FXML
     public void runServer(){
-        display("display works");
-            try {
-                message = "";
-                server = new ServerSocket(12345);
-                while (!message.equals("end")) {
-                    connection = server.accept();
-                    SocketThread socketThread = new SocketThread(connection);
-                    display("connected to client");
-                    executor.execute(socketThread);
+
+        ExecutorService myExecutor = Executors.newFixedThreadPool(10);
+        Task task = new Task<Void>() {
+
+            @Override
+            public Void call() throws Exception {
+
+                display("display works");
+
+                SocketThread socketThreadArray[] = new SocketThread[100];
+                try
+
+                {
+                    message = "";
+                    server = new ServerSocket(12345);
+                    while (!message.equals("end")) {
+
+                        connection = server.accept();
+                        SocketThread socketThread = new SocketThread(connection);
+                        display("connected to client");
+                        executor.execute(socketThread);
+                    }
+                    connection.close();
+                } catch (
+                        IOException e)
+
+                {
+                    e.printStackTrace();
                 }
-                connection.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+
+                return null;
             }
+        };
+
+        myExecutor.submit(task);
 
     }
 
