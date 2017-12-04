@@ -27,6 +27,12 @@ public class SocketThread implements Runnable {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+        try {
+            output.writeObject("message from Server");
+            output.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         System.out.println(message);
         try {
             input.close();
