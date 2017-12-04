@@ -6,7 +6,7 @@ import javafx.scene.control.TextField;
 
 public class ClientController {
 
-    private Client client = new Client("127.0.0.1", 12346);
+    //private Client client = new Client("127.0.0.1", 12346);
 
     @FXML
     private Button send;

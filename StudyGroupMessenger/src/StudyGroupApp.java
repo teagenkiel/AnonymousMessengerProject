@@ -13,12 +13,24 @@ public class StudyGroupApp extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws IOException {
+    public void start(Stage primaryStage) {
 
-        ClientModel appClientModel = new ClientModel("127.0.0.1", 12346);
+
+        ClientModel appClientModel = null;
+        try {
+            appClientModel = new ClientModel("127.0.0.1", 12346);
+        } catch (IOException e) {
+            System.out.println("Error establishing connection with server" + e);
+        }
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("HomeScene.fxml"));
-        Parent root = (Parent)loader.load();
+        Parent root = null;
+        try {
+            root = (Parent)loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         HomeController controller = loader.getController();
 
         controller.setClientModel(appClientModel);
@@ -26,7 +38,6 @@ public class StudyGroupApp extends Application {
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
 
-        appClientModel.getClient().runClient();
 
     }
 }

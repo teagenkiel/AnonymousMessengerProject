@@ -3,15 +3,10 @@
  */
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.*;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
 import javafx.concurrent.Task;
 
 public class ServerController {
@@ -26,8 +21,6 @@ public class ServerController {
     private static final int MAX_SOCKETTHREAD_SIZE = 100;
     private static final int MIN_SOCKETTHREAD_SIZE = 0;
 
-
-
     @FXML
     private TextArea serverLogArea;
 
@@ -41,8 +34,6 @@ public class ServerController {
         socketThreadArray = new SocketThread[MAX_SOCKETTHREAD_SIZE];
         this.socketThreadExecutor = Executors.newFixedThreadPool(MAX_SOCKETTHREAD_SIZE);
         this.serverThreadExecutor = Executors.newSingleThreadExecutor();
-
-
 
         try {
             server = new ServerSocket(port, MAX_SOCKETTHREAD_SIZE);
@@ -60,16 +51,14 @@ public class ServerController {
             @Override
             public Void call() throws Exception {
 
-
+                serverLogArea.appendText("Waiting for a connection...\n");
                 try {
 
                     while (true) {
 
-                        serverLogArea.appendText("Waiting for new connection\n");
-                        socketThreadArray[counter] = new SocketThread(server.accept(), serverLogArea);
+                        socketThreadArray[counter] = new SocketThread(server.accept(), counter, serverLogArea);
 
                         socketThreadExecutor.submit(socketThreadArray[counter]);
-                        serverLogArea.appendText("Connected to client #"+ counter + "\n");
 
                         counter++;
                     }
@@ -89,13 +78,6 @@ public class ServerController {
         };
 
         serverThreadExecutor.submit(runServerTask);
-
-    }
-
-
-    private void display(String message){
-
-        serverLogArea.appendText(message);
 
     }
 

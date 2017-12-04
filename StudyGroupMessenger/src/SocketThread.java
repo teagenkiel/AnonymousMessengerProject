@@ -3,6 +3,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+
 import javafx.scene.control.TextArea;
 
 public class SocketThread implements Runnable {
@@ -11,58 +12,58 @@ public class SocketThread implements Runnable {
     private ObjectOutputStream output;
     private Socket socket;
     private TextArea serverLogArea;
-    private String message = "";
+    private int threadNumber;
 
-    public SocketThread(Socket socket, TextArea serverLogArea){
-        this.socket = socket;
-        this.serverLogArea = serverLogArea;
-    }
+    public SocketThread(Socket socket, int threadNumber, TextArea serverLogArea) {
 
-    public void run() {
-        System.out.println("thread is running");
+
         try {
             input = new ObjectInputStream(socket.getInputStream());
             output = new ObjectOutputStream(socket.getOutputStream());
-            processConnection();
         } catch (IOException e) {
-            e.printStackTrace();
+            serverLogArea.appendText("Error setting up I/O streams in socket thread #" + threadNumber + ". " + e);
+        }
+
+        this.socket = socket;
+        this.serverLogArea = serverLogArea;
+        this.threadNumber = threadNumber + 1;
+
+        serverLogArea.appendText("Connected to socket thread #" + this.threadNumber + ".\n");
+    }
+
+    @Override
+    public void run() {
+
+        String message = "";
+
+        while (!message.equals("TERMINATE")) { //exit out of loop to be implemented
+
+            try {
+
+                message = (String) input.readObject();
+                serverLogArea.appendText("Thread #" + threadNumber + ": " + message + '\n');
+
+
+            } catch (ClassNotFoundException e) {
+                serverLogArea.appendText("Class not found in Client's message from thread #" + threadNumber + e);
+            } catch (IOException e) {
+                serverLogArea.appendText("Error in thread #" + threadNumber);
+            }
+
         }
 
         try {
-            sendData("message from server");
+            input.close();
+            output.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            serverLogArea.appendText("Error closing I/O streams in thread #" + threadNumber);
         }
-        System.out.println("read messages");
 
-            System.out.println("wrote messages");
-            try {
-                input.close();
-                output.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            System.out.println("connection closed");
-
-
+        serverLogArea.appendText("Thread #" + threadNumber + " closed.\n");
 
     }
 
-    private void processConnection()throws IOException{
-        System.out.println("program entered processConnection");
-        while(!message.equals("end")) {
-            try {
-                message = (String) input.readObject();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-            System.out.println("message received");
-            serverLogArea.appendText(message);
-        }
-        System.out.print("program finished processConnection");
-    }
-
-    private void sendData(String message)throws IOException{
+    private void sendData(String message) throws IOException {
         output.writeObject(message);
         output.flush();
     }

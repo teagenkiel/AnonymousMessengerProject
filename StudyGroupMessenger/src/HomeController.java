@@ -1,7 +1,5 @@
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import javafx.concurrent.Task;
@@ -13,6 +11,7 @@ import javafx.concurrent.Task;
 public class HomeController {
 
     private ClientModel clientModel;
+    private ExecutorService clientThreadExecutor;
 
     @FXML
     private TextField messageField;
@@ -21,16 +20,39 @@ public class HomeController {
     private TextArea chatArea;
 
     @FXML
-    private Button sendMessageButton;
+    private void initialize(){
+
+        clientThreadExecutor = Executors.newFixedThreadPool(10);
+
+        Task receiveMessagesTask = new Task<Void>() {
+
+            @Override
+            public Void call() throws Exception {
+
+                String messageFromServer;
+
+                do{
+
+                    messageFromServer = clientModel.getClient().receiveMessageFromServer();
+                    chatArea.appendText(messageFromServer);
+
+                }while(!messageFromServer.equals("TERMINATE"));
+
+                return null;
+            }
+        };
+
+        clientThreadExecutor.submit(receiveMessagesTask);
+
+    }
 
     /**
-     * Method to send a message after a user types something in the message field
+     * Method to send a message after a user types something in the message field and hits 'send' button
      */
     @FXML
     public void sendMessage(){
 
-        ExecutorService myExecutor = Executors.newFixedThreadPool(10);
-        Task task = new Task<Void>() {
+        Task sendMessageTask = new Task<Void>() {
 
             @Override
             public Void call() throws Exception {
@@ -38,19 +60,20 @@ public class HomeController {
                 String message = messageField.getText();
 
                 clientModel.getClient().sendMessage(message);
-                chatArea.appendText(message);
+
                 messageField.clear();
 
                 return null;
             }
         };
 
-        myExecutor.submit(task);
+        clientThreadExecutor.submit(sendMessageTask);
 
 
         //send message to client, which will send to server
         //get entire new chat log from client, which gets it from server
     }
+
 
     public ClientModel getClientModel() {
         return clientModel;
