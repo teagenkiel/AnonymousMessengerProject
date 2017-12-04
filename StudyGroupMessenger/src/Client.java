@@ -54,7 +54,6 @@ public class Client {
         socket = new Socket(InetAddress.getByName(host), port);
 
         message = "Connected to: " + socket.getInetAddress().getHostName();
-
     }
 
 
