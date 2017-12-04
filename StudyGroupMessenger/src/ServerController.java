@@ -57,6 +57,7 @@ public class ServerController {
 
                         //connection = server.accept();
                         socketThreadArray[count] = new SocketThread(server.accept());
+
                         executor.execute(socketThreadArray[count]);
                         display("connected to client"+ Integer.toString(count));
 
@@ -103,7 +104,8 @@ public class ServerController {
     }*/
 
     private void display(String message){
-        serverLogArea.setText(message);
+
+        serverLogArea.appendText(message);
 
     }
 

@@ -1,6 +1,11 @@
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import javafx.concurrent.Task;
+
 /**
  *
  *
@@ -23,14 +28,28 @@ public class HomeController {
     @FXML
     public void sendMessage(){
 
-        String message = messageField.getText();
+        ExecutorService myExecutor = Executors.newFixedThreadPool(10);
+        Task task = new Task<Void>() {
+
+            @Override
+            public Void call() throws Exception {
+
+                String message = messageField.getText();
+
+
+                chatArea.appendText(message);
+                messageField.clear();
+
+                return null;
+            }
+        };
+
+        myExecutor.submit(task);
 
 
         //send message to client, which will send to server
         //get entire new chat log from client, which gets it from server
-        chatArea.setText(message);
 
-        messageField.clear();
 
     }
 
