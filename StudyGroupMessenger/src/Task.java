@@ -3,7 +3,7 @@
  *
  *
  */
-public class Task {
+public class Task<V> {
 
 
     private String task;
