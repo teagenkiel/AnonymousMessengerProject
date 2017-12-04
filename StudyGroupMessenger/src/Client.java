@@ -11,11 +11,6 @@ import java.net.Socket;
 import java.util.EventListener;
 import java.io.EOFException;
 import java.io.IOException;
-import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 
 
 /**
@@ -29,36 +24,37 @@ public class Client {
     private String host;
     private int port;
 
-    @FXML
-    TextField messageBox;
 
-    @FXML
-    Button send;
-
-    @FXML
-    TextArea messageDisplay;
-
-
-    Client(String host, int port) throws IOException {
+    Client(String host, int port) {
 
         this.host = host;
         this.port = port;
-
+        runClient();
     }
 
-    public void runClient() throws IOException{
-        socket = new Socket(InetAddress.getByName(host), port);
-        output = new ObjectOutputStream(socket.getOutputStream());
-        output.flush();
-        input = new ObjectInputStream(socket.getInputStream());
-        processConnection();
-    }
 
-    public void processSend(ActionEvent event){
-
-        if(!messageBox.getText().equals("")){
-            display(messageBox.getText());
+    public void runClient(){
+        try
+        {
+            connectToServer();
+            processConnection();
         }
+        catch (EOFException eofException) {
+            message = "\nClient terminated connection";
+        }
+        catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+
+    }
+
+    private void connectToServer() throws IOException {
+        message = "Attempting connection\n";
+
+        socket = new Socket(InetAddress.getByName(host), port);
+
+        message = "Connected to: " + socket.getInetAddress().getHostName();
+
     }
 
 
@@ -75,15 +71,6 @@ public class Client {
         }
     }
 
-    private void display(String message){
-        new Runnable(){
-
-            @Override
-            public void run() {
-                messageDisplay.setText(messageDisplay.getText() + message);
-            }
-        };
-    }
 
     private void send(String message){
         try {
