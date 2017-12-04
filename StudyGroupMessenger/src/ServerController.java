@@ -40,19 +40,28 @@ public class ServerController {
             public Void call() throws Exception {
 
                 display("display works");
-
+                executor = new Executor() {
+                    @Override
+                    public void execute(Runnable command) {
+                        new Thread(command).start();
+                    }
+                };
                 SocketThread socketThreadArray[] = new SocketThread[100];
                 try
 
                 {
                     message = "";
-                    server = new ServerSocket(12345);
+                    int count = 0;
+                    server = new ServerSocket(12346, 100);
                     while (!message.equals("end")) {
 
-                        connection = server.accept();
-                        SocketThread socketThread = new SocketThread(connection);
-                        display("connected to client");
-                        executor.execute(socketThread);
+                        //connection = server.accept();
+                        socketThreadArray[count] = new SocketThread(server.accept());
+                        executor.execute(socketThreadArray[count]);
+                        display("connected to client"+ Integer.toString(count));
+
+                        count++;
+
                     }
                     connection.close();
                 } catch (
@@ -69,6 +78,8 @@ public class ServerController {
         myExecutor.submit(task);
 
     }
+
+
 
     /*
     public void connectToClient() throws IOException{
