@@ -3,7 +3,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
+import javafx.concurrent.Task;
 import javafx.scene.control.TextArea;
 
 public class SocketThread implements Runnable {
@@ -13,8 +16,9 @@ public class SocketThread implements Runnable {
     private Socket socket;
     private TextArea serverLogArea;
     private int threadNumber;
+    private ServerLogModel serverLogModel;
 
-    public SocketThread(Socket socket, int threadNumber, TextArea serverLogArea) {
+    public SocketThread(Socket socket, int threadNumber, TextArea serverLogArea, ServerLogModel serverLogModel) {
 
 
         try {
@@ -27,12 +31,15 @@ public class SocketThread implements Runnable {
         this.socket = socket;
         this.serverLogArea = serverLogArea;
         this.threadNumber = threadNumber + 1;
+        this.serverLogModel = serverLogModel;
 
         serverLogArea.appendText("Connected to socket thread #" + this.threadNumber + ".\n");
     }
 
     @Override
     public void run() {
+
+        updateChatLog();
 
         String message = "";
 
@@ -42,6 +49,8 @@ public class SocketThread implements Runnable {
 
                 message = (String) input.readObject();
                 serverLogArea.appendText("Thread #" + threadNumber + ": " + message + '\n');
+
+                serverLogModel.addToChatLog("Thread #" + threadNumber + ": " + message + '\n');
 
 
             } catch (ClassNotFoundException e) {
@@ -63,8 +72,29 @@ public class SocketThread implements Runnable {
 
     }
 
-    private void sendData(String message) throws IOException {
-        output.writeObject(message);
-        output.flush();
+    private void updateChatLog(){
+
+        ExecutorService updateExecutor = Executors.newSingleThreadExecutor();
+
+        Task chatLogUpdateTask = new Task<Void>() {
+
+            @Override
+            public Void call() throws Exception {
+
+                String chatLog = "";
+
+                while(!chatLog.equals("TERMINATE")) {
+
+                    chatLog = serverLogModel.getChatLog();
+
+                    output.writeObject(chatLog);
+                    output.flush();
+                }
+
+                return null;
+            }
+        };
+
+        updateExecutor.submit(chatLogUpdateTask);
     }
 }

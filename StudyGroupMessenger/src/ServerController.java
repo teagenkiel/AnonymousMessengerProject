@@ -17,6 +17,7 @@ public class ServerController {
     private SocketThread[] socketThreadArray;
     private ExecutorService socketThreadExecutor;
     private ExecutorService serverThreadExecutor;
+    private ServerLogModel serverLogModel;
 
     private static final int MAX_SOCKETTHREAD_SIZE = 100;
     private static final int MIN_SOCKETTHREAD_SIZE = 0;
@@ -34,6 +35,7 @@ public class ServerController {
         socketThreadArray = new SocketThread[MAX_SOCKETTHREAD_SIZE];
         this.socketThreadExecutor = Executors.newFixedThreadPool(MAX_SOCKETTHREAD_SIZE);
         this.serverThreadExecutor = Executors.newSingleThreadExecutor();
+        this.serverLogModel = new ServerLogModel();
 
         try {
             server = new ServerSocket(port, MAX_SOCKETTHREAD_SIZE);
@@ -56,7 +58,7 @@ public class ServerController {
 
                     while (true) {
 
-                        socketThreadArray[counter] = new SocketThread(server.accept(), counter, serverLogArea);
+                        socketThreadArray[counter] = new SocketThread(server.accept(), counter, serverLogArea, serverLogModel);
 
                         socketThreadExecutor.submit(socketThreadArray[counter]);
 

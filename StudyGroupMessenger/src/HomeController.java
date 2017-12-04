@@ -34,7 +34,7 @@ public class HomeController {
                 do{
 
                     messageFromServer = clientModel.getClient().receiveMessageFromServer();
-                    chatArea.appendText(messageFromServer);
+                    chatArea.setText(messageFromServer);
 
                 }while(!messageFromServer.equals("TERMINATE"));
 
