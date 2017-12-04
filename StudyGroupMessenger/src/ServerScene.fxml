@@ -31,7 +31,7 @@
       <TextArea fx:id="serverLogArea" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       <FlowPane alignment="CENTER" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <children>
-            <Button fx:id="runServerButton" mnemonicParsing="false" onAction="#run" text="Run Server">
+            <Button fx:id="runServerButton" mnemonicParsing="false" onAction="#runServer" text="Run Server">
                <font>
                   <Font name="Georgia" size="23.0" />
                </font>
