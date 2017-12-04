@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="39cf3610-6714-4d1c-a5d9-0eb6b64d5d6d" name="Default" comment="">
+    <list default="true" id="39cf3610-6714-4d1c-a5d9-0eb6b64d5d6d" name="Default" comment="server handles multiple clients">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/StudyGroupMessenger/src/WrkrRunnable.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/production/StudyGroupMessenger/Client$1.class" afterPath="$PROJECT_DIR$/production/StudyGroupMessenger/Client$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/production/StudyGroupMessenger/Client.class" afterPath="$PROJECT_DIR$/production/StudyGroupMessenger/Client.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/production/StudyGroupMessenger/ClientTest.class" afterPath="$PROJECT_DIR$/production/StudyGroupMessenger/ClientTest.class" />
@@ -62,8 +63,8 @@
       <file leaf-file-name="SocketThread.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/StudyGroupMessenger/src/SocketThread.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="307">
-              <caret line="58" column="9" lean-forward="false" selection-start-line="58" selection-start-column="9" selection-end-line="58" selection-end-column="9" />
+            <state relative-caret-position="343">
+              <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -339,7 +340,7 @@
       <workItem from="1512355276458" duration="3000" />
       <workItem from="1512355479755" duration="1634000" />
       <workItem from="1512357190202" duration="559000" />
-      <workItem from="1512357799053" duration="1151000" />
+      <workItem from="1512357799053" duration="1448000" />
     </task>
     <task id="LOCAL-00001" summary="server handles multiple clients">
       <created>1512356414409</created>
@@ -348,15 +349,21 @@
       <option name="project" value="LOCAL" />
       <updated>1512356414409</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="server handles multiple clients">
+      <created>1512360378393</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1512360378393</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8058000" />
+    <option name="totallyTimeSpent" value="8355000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1292" height="651" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -371,7 +378,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936978" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.253125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.253125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -883,8 +890,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/StudyGroupMessenger/src/SocketThread.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="58" column="9" lean-forward="false" selection-start-line="58" selection-start-column="9" selection-end-line="58" selection-end-column="9" />
+        <state relative-caret-position="343">
+          <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

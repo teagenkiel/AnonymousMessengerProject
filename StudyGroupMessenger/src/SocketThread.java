@@ -15,7 +15,6 @@ public class SocketThread implements Runnable {
     }
 
     public void run() {
-        // while (true) {
         System.out.println("thread is running");
         try {
             input = new ObjectInputStream(socket.getInputStream());
@@ -24,15 +23,14 @@ public class SocketThread implements Runnable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("got IO streams");
 
+        try {
+            sendData("message from server");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         System.out.println("read messages");
-            try {
-                output.writeObject("message from Server");
-                output.flush();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+
             System.out.println("wrote messages");
             try {
                 input.close();
@@ -42,7 +40,7 @@ public class SocketThread implements Runnable {
             }
             System.out.println("connection closed");
 
-      //  }
+
 
     }
 
@@ -58,6 +56,10 @@ public class SocketThread implements Runnable {
             System.out.println(message);
        // }
         System.out.print("program finished processConnection");
+    }
 
+    private void sendData(String message)throws IOException{
+        output.writeObject(message);
+        output.flush();
     }
 }
