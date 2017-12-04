@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5f527459-14d6-47c0-9c99-5a3836896d52" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/production/StudyGroupMessenger/ServerTest.class" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/StudyGroupMessenger/src/CreateAccountController.java" afterPath="$PROJECT_DIR$/StudyGroupMessenger/src/CreateAccountController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/StudyGroupMessenger/src/Group.java" afterPath="$PROJECT_DIR$/StudyGroupMessenger/src/Group.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/StudyGroupMessenger/src/Profile.java" afterPath="$PROJECT_DIR$/StudyGroupMessenger/src/Profile.java" />
@@ -44,7 +43,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ClientTest.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ClientTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/StudyGroupMessenger/src/ClientTest.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="422">
@@ -52,6 +51,28 @@
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ServerController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/StudyGroupMessenger/src/ServerController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="200">
+              <caret line="10" column="37" lean-forward="true" selection-start-line="10" selection-start-column="37" selection-end-line="10" selection-end-column="37" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Task.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/StudyGroupMessenger/src/Task.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="25">
+              <caret line="1" column="2" lean-forward="false" selection-start-line="1" selection-start-column="2" selection-end-line="1" selection-end-column="2" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -309,7 +330,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1512333647550</updated>
-      <workItem from="1512333648802" duration="8529000" />
+      <workItem from="1512333648802" duration="9251000" />
     </task>
     <task id="LOCAL-00001" summary="worked on Task class">
       <created>1512333757385</created>
@@ -329,7 +350,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8529000" />
+    <option name="totallyTimeSpent" value="9251000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-11" y="-11" width="1942" height="1042" extended-state="6" />
@@ -433,16 +454,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/StudyGroupMessenger/src/ServerController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-50">
-          <caret line="9" column="18" lean-forward="true" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/StudyGroupMessenger/src/Profile.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="625">
@@ -452,14 +463,6 @@
             <element signature="e#645#646#0" expanded="true" />
             <element signature="e#675#676#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/StudyGroupMessenger/src/Task.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="1" column="2" lean-forward="false" selection-start-line="1" selection-start-column="2" selection-end-line="1" selection-end-column="2" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -544,6 +547,24 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/StudyGroupMessenger/src/ServerController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="10" column="37" lean-forward="true" selection-start-line="10" selection-start-column="37" selection-end-line="10" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/StudyGroupMessenger/src/Task.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="25">
+          <caret line="1" column="2" lean-forward="false" selection-start-line="1" selection-start-column="2" selection-end-line="1" selection-end-column="2" />
+          <folding />
         </state>
       </provider>
     </entry>
