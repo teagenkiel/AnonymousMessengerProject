@@ -15,15 +15,16 @@ import java.util.concurrent.Executors;
 import javafx.concurrent.Task;
 
 public class ServerController {
-    private int port;
-    private String message;
-    private ObjectInputStream input;
-    private ObjectOutputStream output;
-    private Socket connection;
-    private ServerSocket server;
-    private Executor executor;
-    private int counter = 0;
 
+    private int port;
+    private int counter;
+    private ServerSocket server;
+    private SocketThread[] socketThreadArray;
+    private ExecutorService socketThreadExecutor;
+    private ExecutorService serverThreadExecutor;
+
+    private static final int MAX_SOCKETTHREAD_SIZE = 100;
+    private static final int MIN_SOCKETTHREAD_SIZE = 0;
 
 
 
@@ -31,91 +32,71 @@ public class ServerController {
     private TextArea serverLogArea;
 
     @FXML
+    private void initialize(){
+
+        port = 12346;
+
+        counter = MIN_SOCKETTHREAD_SIZE;
+
+        socketThreadArray = new SocketThread[MAX_SOCKETTHREAD_SIZE];
+        this.socketThreadExecutor = Executors.newFixedThreadPool(MAX_SOCKETTHREAD_SIZE);
+        this.serverThreadExecutor = Executors.newSingleThreadExecutor();
+
+
+
+        try {
+            server = new ServerSocket(port, MAX_SOCKETTHREAD_SIZE);
+        } catch (IOException e) {
+            serverLogArea.appendText("Not able to establish server socket\n");
+        }
+    }
+
+
+    @FXML
     public void runServer(){
 
-        ExecutorService myExecutor = Executors.newFixedThreadPool(10);
-        Task task = new Task<Void>() {
+        Task runServerTask = new Task<Void>() {
 
             @Override
             public Void call() throws Exception {
 
-                display("display works");
-                executor = new Executor() {
-                    @Override
-                    public void execute(Runnable command) {
-                        new Thread(command).start();
+
+                try {
+
+                    while (true) {
+
+                        serverLogArea.appendText("Waiting for new connection\n");
+                        socketThreadArray[counter] = new SocketThread(server.accept(), serverLogArea);
+
+                        socketThreadExecutor.submit(socketThreadArray[counter]);
+                        serverLogArea.appendText("Connected to client #"+ counter + "\n");
+
+                        counter++;
                     }
-                };
-                SocketThread socketThreadArray[] = new SocketThread[100];
-                try
 
-                {
-                    message = "";
-                    int count = 0;
-                    server = new ServerSocket(12346, 100);
-                    while (!message.equals("end")) {
+                }
+                catch (IOException e){
 
-                        //connection = server.accept();
-                        socketThreadArray[count] = new SocketThread(server.accept());
+                    serverLogArea.appendText("Error while running server \n" + e);
+                }
+                finally {
 
-                        executor.execute(socketThreadArray[count]);
-                        display("connected to client"+ Integer.toString(count));
-
-                        count++;
-
-                    }
-                    connection.close();
-                } catch (
-                        IOException e)
-
-                {
-                    e.printStackTrace();
+                    socketThreadExecutor.shutdownNow(); //close all currently running socket threads
                 }
 
                 return null;
             }
         };
 
-        myExecutor.submit(task);
+        serverThreadExecutor.submit(runServerTask);
 
     }
 
-
-
-    /*
-    public void connectToClient() throws IOException{
-        ServerSocket socket = new ServerSocket(12345);
-        message = "";
-        while(!message.equals("end")){
-            connection = socket.accept();
-            new Thread(new ServerController(port)).start();
-        }
-    }*/
-
-
-/*    private void processConnection() throws IOException{
-
-        try {
-            message = (String) input.readObject();
-            display(message);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }*/
 
     private void display(String message){
 
         serverLogArea.appendText(message);
 
-    }
-
-    private void send(String message){
-        try {
-            output.writeObject(message);
-            output.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public void setPort(int port) {

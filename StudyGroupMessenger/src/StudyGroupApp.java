@@ -13,17 +13,20 @@ public class StudyGroupApp extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws IOException {
 
-        Parent root = null;
-        try {
-            root = FXMLLoader.load(getClass().getResource("HomeScene.fxml"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        ClientModel appClientModel = new ClientModel("127.0.0.1", 12346);
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("HomeScene.fxml"));
+        Parent root = (Parent)loader.load();
+        HomeController controller = loader.getController();
+
+        controller.setClientModel(appClientModel);
 
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
+
+        appClientModel.getClient().runClient();
 
     }
 }

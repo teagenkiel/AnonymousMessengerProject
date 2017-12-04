@@ -29,7 +29,6 @@ public class Client {
 
         this.host = host;
         this.port = port;
-        runClient();
     }
 
 
@@ -37,7 +36,7 @@ public class Client {
         try
         {
             connectToServer();
-            processConnection();
+            //processConnection();
         }
         catch (EOFException eofException) {
             message = "\nClient terminated connection";
@@ -52,6 +51,9 @@ public class Client {
         message = "Attempting connection\n";
 
         socket = new Socket(InetAddress.getByName(host), port);
+
+        output = new ObjectOutputStream(socket.getOutputStream());
+        input = new ObjectInputStream(socket.getInputStream());
 
         message = "Connected to: " + socket.getInetAddress().getHostName();
     }
@@ -71,7 +73,7 @@ public class Client {
     }
 
 
-    private void send(String message){
+    public void sendMessage(String message){
         try {
             output.writeObject(message);
             output.flush();

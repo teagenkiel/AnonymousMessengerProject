@@ -15,7 +15,6 @@ public class ClientModel {
         this.client = new Client(clientHostAddress, clientPortNumber);
         this.clientHostAddress = clientHostAddress;
         this.clientPortNumber = clientPortNumber;
-        //swag me 1738
 
     }
 

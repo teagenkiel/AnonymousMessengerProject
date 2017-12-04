@@ -12,6 +12,7 @@ import javafx.concurrent.Task;
  */
 public class HomeController {
 
+    private ClientModel clientModel;
 
     @FXML
     private TextField messageField;
@@ -36,7 +37,7 @@ public class HomeController {
 
                 String message = messageField.getText();
 
-
+                clientModel.getClient().sendMessage(message);
                 chatArea.appendText(message);
                 messageField.clear();
 
@@ -49,12 +50,13 @@ public class HomeController {
 
         //send message to client, which will send to server
         //get entire new chat log from client, which gets it from server
-
-
     }
 
+    public ClientModel getClientModel() {
+        return clientModel;
+    }
 
-
-
-
+    public void setClientModel(ClientModel clientModel) {
+        this.clientModel = clientModel;
+    }
 }

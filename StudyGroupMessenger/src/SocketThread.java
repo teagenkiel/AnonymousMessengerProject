@@ -3,15 +3,19 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import javafx.scene.control.TextArea;
 
 public class SocketThread implements Runnable {
+
     private ObjectInputStream input;
     private ObjectOutputStream output;
     private Socket socket;
+    private TextArea serverLogArea;
     private String message = "";
 
-    SocketThread(Socket socket){
+    public SocketThread(Socket socket, TextArea serverLogArea){
         this.socket = socket;
+        this.serverLogArea = serverLogArea;
     }
 
     public void run() {
@@ -46,15 +50,15 @@ public class SocketThread implements Runnable {
 
     private void processConnection()throws IOException{
         System.out.println("program entered processConnection");
-       // while(!message.equals("end")) {
+        while(!message.equals("end")) {
             try {
                 message = (String) input.readObject();
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
             System.out.println("message received");
-            System.out.println(message);
-       // }
+            serverLogArea.appendText(message);
+        }
         System.out.print("program finished processConnection");
     }
 
