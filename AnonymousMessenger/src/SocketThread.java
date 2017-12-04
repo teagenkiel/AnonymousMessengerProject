@@ -48,9 +48,9 @@ public class SocketThread implements Runnable {
             try {
 
                 message = (String) input.readObject();
-                serverLogArea.appendText("Thread #" + threadNumber + ": " + message + '\n');
+                serverLogArea.appendText("User #" + threadNumber + ": " + message + '\n');
 
-                serverLogModel.addToChatLog("Thread #" + threadNumber + ": " + message + '\n');
+                serverLogModel.addToChatLog("User #" + threadNumber + ": " + message + '\n');
 
 
             } catch (ClassNotFoundException e) {

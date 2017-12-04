@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 
-public class StudyGroupServerApp extends Application {
+public class AnonymousServerApp extends Application {
 
     public static void main(String[] args) {
         launch(args);
@@ -24,7 +24,6 @@ public class StudyGroupServerApp extends Application {
 
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
-
 
     }
 }

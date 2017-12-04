@@ -8,7 +8,7 @@ import javafx.concurrent.Task;
  *
  *
  */
-public class HomeController {
+public class ClientSceneController {
 
     private ClientModel clientModel;
     private ExecutorService clientThreadExecutor;

@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class StudyGroupApp extends Application {
+public class AnonymousClientApp extends Application {
 
     public static void main(String[] args) {
         launch(args);
@@ -23,7 +23,7 @@ public class StudyGroupApp extends Application {
             System.out.println("Error establishing connection with server" + e);
         }
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("HomeScene.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ClientScene.fxml"));
         Parent root = null;
         try {
             root = (Parent)loader.load();
@@ -31,7 +31,7 @@ public class StudyGroupApp extends Application {
             e.printStackTrace();
         }
 
-        HomeController controller = loader.getController();
+        ClientSceneController controller = loader.getController();
 
         controller.setClientModel(appClientModel);
 

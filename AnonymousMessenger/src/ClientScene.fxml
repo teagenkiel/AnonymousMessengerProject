@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<GridPane prefHeight="395.0" prefWidth="416.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ClientSceneController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="417.0" minWidth="10.0" prefWidth="259.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <GridPane>
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="119.0" minHeight="0.0" prefHeight="36.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="251.0" minHeight="10.0" prefHeight="251.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <FlowPane alignment="CENTER" prefHeight="36.0" prefWidth="249.0">
+               <children>
+                  <Label text="Chat">
+                     <font>
+                        <Font name="Georgia" size="28.0" />
+                     </font>
+                  </Label>
+               </children>
+            </FlowPane>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.rowIndex="2">
+               <children>
+                  <TextField fx:id="messageField" promptText="Enter message here">
+                     <font>
+                        <Font name="Georgia" size="13.0" />
+                     </font>
+                  </TextField>
+                  <Button fx:id="sendMessageButton" mnemonicParsing="false" onAction="#sendMessage" text="Send">
+                     <font>
+                        <Font name="Georgia" size="13.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.rowIndex="3" />
+            <TextArea fx:id="chatArea" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+         </children>
+      </GridPane>
+   </children>
+</GridPane>
