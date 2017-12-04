@@ -24,6 +24,9 @@ public class ServerController {
     private Executor executor;
     private int counter = 0;
 
+
+
+
     @FXML
     private TextArea serverLogArea;
 
